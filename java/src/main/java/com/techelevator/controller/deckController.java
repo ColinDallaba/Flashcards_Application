@@ -50,9 +50,9 @@ public class deckController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(path = "/update-deck", method = RequestMethod.PUT)
-    public void updateCard(@Valid @RequestBody DeckDTO newdeck) {
-    	myDeckDAO.updateDeck(newdeck.getUserID(), newdeck.getDeckID(), newdeck.getName(), newdeck.getDescription());
+    @RequestMapping(path = "/update-deck/{deckID}", method = RequestMethod.PUT)
+    public void updateCard(@Valid @PathVariable("deckID") int deckID, @RequestBody DeckDTO newdeck) {
+    	myDeckDAO.updateDeck(deckID, newdeck.getName(), newdeck.getDescription());
     }
     
     @ResponseStatus(HttpStatus.NO_CONTENT)

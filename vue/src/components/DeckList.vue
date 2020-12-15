@@ -26,10 +26,11 @@
             <td>{{ deck.description }}</td>
             <td>{{ deck.deckID }}
             <td>
+              <button type="button" class="updateDeck" @click="$router.push({name: 'update-deck', params:{deckID: deck.deckID}})">EDIT</button>
               <button type="button" class="delete-icon" @click="removeDecks(deck.deckID)">DELETE</button>
-            </td>
             <button id="view-deck" type="button" @click="$router.push({
    name: 'deck-with-cards', params: {deckID: deck.deckID }})">View Cards</button>
+            </td>
           </tr>
         </tbody>
       </table>

@@ -9,6 +9,8 @@ import CreateDeck from '../views/CreateDeck.vue'
 import  DeckWithCards from '../views/DeckWithCards.vue'
 import CreateCard from '../views/CreateCard.vue'
 import Session from '../views/ViewSession.vue'
+import UpdateCard from '../views/UpdateCard.vue'
+import UpdateDeck from '../views/UpdateDeck.vue'
 
 Vue.use(Router)
 
@@ -85,6 +87,22 @@ const router = new Router({
       path: "/view-session/",
       name: "view-session",
       component: Session,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/update-card/:cardID",
+      name: "update-card",
+      component: UpdateCard,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/update-deck/:deckID",
+      name: "update-deck",
+      component: UpdateDeck,
       meta: {
         requiresAuth: false
       }

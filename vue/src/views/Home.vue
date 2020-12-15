@@ -3,7 +3,7 @@
   <div class="home">
   
     <view-decks />
-    <!-- <search /> -->
+    
     <!-- <router-view :key="$route.fullPath" class="routerView" /> -->
     <!-- <div class="button">
       
@@ -16,13 +16,13 @@
 
 <script>
 import ViewDecks from '@/views/ViewDecks.vue';
-// import Search from '@/components/Search.vue';
+
 
 export default {
   name: "home",
   components: {
     ViewDecks,
-    // Search
+    
  }
 };
 </script>

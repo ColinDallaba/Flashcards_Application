@@ -23,10 +23,13 @@ export default new Vuex.Store({
     decks: [],
     cards: [],
     currentDeckID: {},
+    currentCardID: {}
     
   },
   mutations: {
-   
+   SET_CARD_ID(state, id) {
+     state.currentCardID = id;
+   },
     SET_ID(state, id) {
       state.currentDeckID = id;
     },

@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.techelevator.dao.cardDAO;
 import com.techelevator.model.Card;
 import com.techelevator.model.cardDTO;
-
 
 
 @RestController
@@ -45,10 +45,11 @@ public class cardController {
     	
     }
     
-    @RequestMapping(path = "/update-card", method = RequestMethod.PUT)
-    public void updateCard(@Valid @RequestBody cardDTO card) {
-    	myCardDAO.updateCard(card.getUserID(), card.getDeckID(), card.getCardID(), card.getQuestion(), card.getAnswer(), card.isCorrect());
+    @RequestMapping(path = "/update-card/{cardID}", method = RequestMethod.PUT)
+    public void updateCard(@Valid @PathVariable("cardID") int cardID, @RequestBody cardDTO card) {
+    	myCardDAO.updateCard(cardID, card.getQuestion(), card.getAnswer(), card.isCorrect());
     }
+
     
    
     @ResponseStatus(HttpStatus.NO_CONTENT)

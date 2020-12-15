@@ -40,9 +40,9 @@ public class cardSqlDAO implements cardDAO {
 	}
 	
 	@Override
-	public void updateCard(int userID, int deckID, int cardID, String question, String answer, Boolean correct) {
-		String sql = "UPDATE cards SET deck_id = ?, question = ?, answer = ?, correct = ? WHERE user_id = ? AND card_id = ?";
-		jdbc.update(sql, deckID, question, answer, correct, userID, cardID);
+	public void updateCard(int cardID, String question, String answer, boolean correct) {
+		String sql = "UPDATE cards SET question = ?, answer = ?, correct = ? WHERE card_id = ?";
+		jdbc.update(sql, question, answer, correct, cardID);
 		
 		String checkCorrect = "SELECT correct FROM cards WHERE card_id = ?";
 		boolean results = jdbc.queryForObject(checkCorrect, boolean.class, cardID);

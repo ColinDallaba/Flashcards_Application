@@ -34,12 +34,15 @@ export default {
     return axios.post('/create-card', card);
   },
 
-  updateCard(card) {
-    return axios.put(`/update-card`, card);
+  updateCard(cardID, card) {
+    return axios.put(`/update-card/${cardID}`, card);
   },
 
   deleteCard(cardID) {
     return axios.delete(`/card/${cardID}`);
+  },
+  updateDeck(deckID, deck) {
+    return axios.put(`/update-deck/${deckID}`, deck);
   }
 
 }

@@ -39,9 +39,9 @@ public class deckSqlDAO implements deckDAO {
 	}
 	
 	@Override
-	public void updateDeck(int userID, int deckID, String name, String description) {
-		String sql = "UPDATE decks SET name = ?, description = ? WHERE user_id = ? AND deck_id = ?";
-		jdbc.update(sql, name, description, userID, deckID);
+	public void updateDeck(int deckID, String name, String description) {
+		String sql = "UPDATE decks SET name = ?, description = ? WHERE deck_id = ?";
+		jdbc.update(sql, name, description, deckID);
 		
 		//calculate percentage
 		String rankPercent = "SELECT rank FROM cards WHERE deck_id = ?";
@@ -59,18 +59,18 @@ public class deckSqlDAO implements deckDAO {
 		double tempPercent = calculatedPercentage * 100;
 		int finalPercent = (int)tempPercent;
 		
-		String updateRank = "UPDATE decks SET rank = ? WHERE user_id = ? AND deck_id = ?";
-		jdbc.update(updateRank, finalPercent, userID, deckID);
+		String updateRank = "UPDATE decks SET rank = ? WHERE deck_id = ?";
+		jdbc.update(updateRank, finalPercent, deckID);
 		
 		//changes correct status based on rank average
-		String percentage = "SELECT rank FROM decks WHERE user_id = ? AND deck_id = ?";
-		int result = jdbc.queryForObject(percentage, int.class, userID, deckID);
+		String percentage = "SELECT rank FROM decks WHERE  deck_id = ?";
+		int result = jdbc.queryForObject(percentage, int.class, deckID);
 			if(result < 100) {
-				String updateToFalse = "UPDATE decks SET correct = false WHERE user_id = ? AND deck_id = ?";
-				jdbc.update(updateToFalse, userID, deckID);
+				String updateToFalse = "UPDATE decks SET correct = false WHERE deck_id = ?";
+				jdbc.update(updateToFalse, deckID);
 			} else {
-				String updateToTrue = "UPDATE decks SET correct = true WHERE user_id = ? AND deck_id = ?";
-				jdbc.update(updateToTrue, userID, deckID);
+				String updateToTrue = "UPDATE decks SET correct = true WHERE deck_id = ?";
+				jdbc.update(updateToTrue, deckID);
 			}
 		
 	}
