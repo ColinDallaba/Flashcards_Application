@@ -7,7 +7,9 @@
       />
       <ul>
         <li class="home">
-          <router-link v-bind:to="{ name: 'home' }">Home</router-link
+          <router-link v-bind:to="{ name: 'home' }"
+                        v-if="$store.state.token != ''">
+                        Home</router-link
           >&nbsp;|&nbsp;
         </li>
         <li class="logout">

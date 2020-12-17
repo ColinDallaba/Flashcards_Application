@@ -16,8 +16,7 @@
     "core-js": "^2.6.5",
     "vue": "^2.6.11",
     "vue-router": "^3.0.3",
-    "vuex": "^3.0.1",
-    "vue-confetti": "2.2.1"
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.9.0",
@@ -30,7 +29,7 @@
     "chai": "^4.1.2",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
-    "vue-template-compiler": "^2.6.10",
-    "vue-confetti": "2.2.1"
+    "vue-confetti": "^2.2.1",
+    "vue-template-compiler": "^2.6.10"
   }
 }

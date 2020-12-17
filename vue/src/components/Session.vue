@@ -5,8 +5,8 @@
         Study Session
       </div>
     </div>
-
-    <div class="container">
+    <div class="containers">
+      <div class="child">
       <div class="flip-card">
         <div class="flip-card-inner">
           <div class="flip-card-front">
@@ -19,16 +19,17 @@
           </div>
         </div>
       </div>
+        </div>
     </div>
-
-    <button type="button" class="delete-icon" v-on:click="getNextCard()">
-      NEXT CARD
+  <div class="buttons">
+    <button type="button" v-on:click="getNextCard()">
+      Next Card
     </button>
-    <br />
-    <button v-on:click="markCorrect()">Mark Correct</button>
-    <br />
-    <button v-on:click="endSession()">End Session</button>
-    <br />
+
+    <button type="button" v-on:click="markCorrect()">Mark Correct</button>
+
+    <button type="button" v-on:click="endSession()">End Session</button>
+
     <button
       type="button"
       class="viewResults"
@@ -36,6 +37,7 @@
     >
       View Results
     </button>
+    </div>
   </div>
 </template>
 
@@ -81,7 +83,11 @@ export default {
     update(id) {
       authService
         .markCardCorrect(id)
-        .then((response) => {})
+        .then((response) => {
+          if (response.status === 200) {
+          alert("Deck updated!");
+        }
+        })
         .catch((error) => {
           console.error(error);
         });
@@ -91,107 +97,16 @@ export default {
 };
 </script>
 
-<style>
-body {
-  font-family: "Montserrat", sans-serif;
-}
-
-p {
-  align-content: center;
-  list-style-type: none;
-  padding: 10px 10px;
-  transition: all 0.3s ease;
-}
-
-.container {
-  max-width: 100%;
-  padding: 1em;
-}
-
-.card {
-  display: block;
-  width: 650px;
-  height: 350px;
-  padding: 80px 50px;
-  background-color: #51aae5;
-  border-radius: 7px;
-  margin: 20%;
-  text-align: center;
-  line-height: 27px;
-  cursor: pointer;
-  position: relative;
-  color: #fff;
-  font-weight: 600;
-  font-size: 20px;
-  -webkit-box-shadow: 9px 10px 22px -8px rgba(209, 193, 209, 0.5);
-  -moz-box-shadow: 9px 10px 22px -8px rgba(209, 193, 209, 0.5);
-  box-shadow: 9px 10px 22px -8px rgba(209, 193, 209, 0.5);
-  will-change: transform;
-}
-
-p:hover {
-  transform: scale(1.1);
-}
-
-p:nth-child(-n + 3) .card {
-  background-color: #e65f51;
-}
-
-p:nth-child(2n + 1) .card {
-  background-color: #a17de9;
-}
-
-p:nth-child(4n) .card {
-  background-color: #feca34;
-}
-
-p:nth-child(5n-2) .card {
-  background-color: #51aae5;
-}
-
-p:nth-child(4n + 4) .card {
-  background-color: #feca34;
-}
-
-p:nth-child(-7n + 7) .card {
-  background-color: #e46055;
-}
-
-.correct {
-  position: absolute;
-  right: 0;
-  top: 0;
-  padding: 10px 15px;
-  opacity: 0.4;
-  transition: all 0.5s ease;
-}
-
-.correct:hover {
-  opacity: 1;
-}
-
-.flip-enter-active {
-  transition: all 0.4s ease;
-}
-
-.flip-leave-active {
-  display: none;
-}
-
-.flip-enter,
-.flip-leave {
-  transform: rotateY(180deg);
-  opacity: 0;
-}
+<style scoped>
 
 .page {
   position: absolute;
   z-index: -3;
 
-  background-image: linear-gradient(
+ background-image: linear-gradient(
     0deg,
-    rgb(252, 220, 226) 9%,
-    rgba(255, 255, 255, 1) 64%
+    rgb(239 128 102 / 79%) 40%,
+    rgba(3 83 99 / 2%) 64%
   );
   min-height: 100%;
   min-width: 1024px;
@@ -260,15 +175,14 @@ p:nth-child(-7n + 7) .card {
 /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
 .flip-card {
   background-color: transparent;
-  width: 300px;
-  height: 200px;
-  border: 1px solid #f1f1f1;
+  width: 700px;
+  height: 350px;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
 
 /* This container is needed to position the front and back side */
 .flip-card-inner {
-  position: relative;
+  position: absolute;
   width: 100%;
   height: 100%;
   text-align: center;
@@ -284,6 +198,7 @@ p:nth-child(-7n + 7) .card {
 /* Position the front and back side */
 .flip-card-front,
 .flip-card-back {
+  text-align: center;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -293,14 +208,48 @@ p:nth-child(-7n + 7) .card {
 
 /* Style the front side (fallback if image is missing) */
 .flip-card-front {
-  background-color: #bbb;
-  color: black;
+  border-radius: 25px;
+  background-color: rgb(106, 90, 205);
+  color: rgba(248, 198, 126, 1);
 }
 
 /* Style the back side */
 .flip-card-back {
-  background-color: dodgerblue;
-  color: white;
+  border-radius: 25px;
+  background-color: rgba(248, 198, 126, 1);
+  color: rgb(106, 90, 205);
   transform: rotateY(180deg);
+}
+
+button {
+  font-family: "Roboto", sans-serif;
+  width: 150px;
+  margin-right: 10px;
+  background-color: rgb(127, 181, 127);
+  border-radius: 50px;
+}
+
+button:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  text-align: center;
+}
+
+.buttons {
+  text-align: center;
+  padding-top: 50px;
+  padding-left: 40px;
+}
+
+.containers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.childer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>
