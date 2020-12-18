@@ -29,13 +29,6 @@
       <button type="button" v-on:click="getNextCard()">Next Card</button>
       <button type="button" v-on:click="markCorrect()">Mark Correct</button>
       <button type="button" v-on:click="endSession()">End Session</button>
-      <button
-        type="button"
-        class="viewResults"
-        @click="$router.push('/view-results')"
-      >
-        View Results
-      </button>
     </div>
   </div>
 </template>
@@ -183,7 +176,7 @@ export default {
   border-radius: 25px;
   background-color: rgb(106, 90, 205);
   color: rgba(248, 198, 126, 1);
-  font-size: 100px;
+  font-size: 50px;
 }
 .flip-card-back {
   border-radius: 25px;
