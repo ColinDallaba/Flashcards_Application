@@ -84,8 +84,8 @@ input[type="text"] {
 
   background-image: linear-gradient(
     0deg,
-    rgb(252, 220, 226) 9%,
-    rgba(255, 255, 255, 1) 64%
+    rgb(239 128 102 / 79%) 40%,
+    rgba(3 83 99 / 2%) 64%
   );
   min-height: 100%;
   min-width: 100%;
@@ -184,7 +184,7 @@ button {
   font-family: "Roboto", sans-serif;
   width: 150px;
 
-  background-color: rgba(255, 255, 255, 1);
+  background-color: rgb(127 181 127);
   border-radius: 10px;
   display: block;
   margin-left: auto;

@@ -3,16 +3,10 @@
 </template>
 
 <script>
-
-import Session from '../components/Session.vue'
+import Session from "../components/Session.vue";
 
 export default {
-    name: "view-session",
-    components: { Session }
-
-}
-
+  name: "view-session",
+  components: { Session },
+};
 </script>
-<style>
-
-</style>

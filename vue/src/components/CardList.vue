@@ -1,25 +1,24 @@
 <template>
   <div class="container">
     <div class="wrapper">
-      <div class="clip-text clip-text_thirteen clip-text--cover">
-        Your Deck
-        <!-- {{ $store.state.decks[findIndex].name }} -->
-      </div>
+      <div class="clip-text clip-text_thirteen clip-text--cover">Your Deck</div>
     </div>
 
-    <button type="button" class="createCard" @click="checkIf10Cards()">
+    <button type="button" class="addCard" @click="checkIf10Cards()">
       Add Card
     </button>
     <button
       type="button"
-      class="viewSession"
+      class="startSession"
       @click="$router.push('/view-session')"
     >
       Start Session
     </button>
-    <button type="button" class="createCard" @click="$router.push('/')">
-      Choose Another Deck
-    </button>
+    <div class="buttonWrapper">
+      <button type="button" class="createDeck" @click="$router.push('/')">
+        Choose Another Deck
+      </button>
+    </div>
 
     <div
       class="cards"
@@ -28,35 +27,43 @@
     >
       <div
         class="flip-box-inner"
-        ontouchstart="this.classList.toggle('hover');"
+        v-on:click="toggleCard($store.state.cards[currentCardIndex])"
       >
         <div class="flip-box-front">
           {{ card.question }}
-          {{ card.cardID }}
+
+          <div class="rank">Rank: {{ cardRank(card.rank) }}</div>
         </div>
         <div class="flip-box-back">
           {{ card.answer }}
         </div>
       </div>
       <br />
-      <button
-        type="button"
-        class="updateCard"
-        @click="
-          $router.push({
-            name: 'update-card',
-            params: { cardID: card.cardID },
-          })
-        "
-      >
-        EDIT
-      </button>
-      <br />
-      <button type="button" @click="removeCards(card.cardID)">DELETE</button>
-      <td>Rank: {{ cardRank(card.rank) }}</td>
+      <div class="editDelete">
+        <button
+          type="button"
+          class="updateCard"
+          @click="
+            $router.push({
+              name: 'update-card',
+              params: { cardID: card.cardID },
+            })
+          "
+        >
+          Edit
+        </button>
+        <button
+          type="button"
+          class="deleteCard"
+          @click="removeCards(card.cardID)"
+        >
+          Delete
+        </button>
+      </div>
     </div>
   </div>
 </template>
+
 
 <script>
 import authService from "../services/AuthService";
@@ -116,6 +123,9 @@ export default {
     getDeckID() {
       this.$store.commit("SET_ID", this.$route.params.deckID);
     },
+    toggleCard(card) {
+      card.flipped = !card.flipped;
+    },
     retrieveCards() {
       authService.getCards(this.$route.params.deckID).then((response) => {
         this.$store.commit("SET_CARDS", response.data);
@@ -141,6 +151,55 @@ export default {
 </script>
 
 <style scoped>
+.rank {
+  font-family: "Roboto", sans-serif;
+  font-size: 17px;
+  padding-top: 25px;
+}
+.container {
+  position: absolute;
+  z-index: -3;
+
+  background-image: linear-gradient(
+    0deg,
+    rgb(239 128 102 / 79%) 40%,
+    rgba(3 83 99 / 2%) 64%
+  );
+  min-height: 100%;
+  min-width: 100%;
+
+  width: 100%;
+  height: auto;
+
+  top: 0;
+  left: 0;
+}
+.wrapper {
+  text-align: center;
+  padding-top: 50px;
+}
+
+.clip-text {
+  font-size: 6em;
+  font-weight: bold;
+  line-height: 1;
+  position: relative;
+  display: inline-block;
+  margin: 0.25em;
+  padding: 0.1em 0.3em;
+  text-align: center;
+  color: #fff;
+  -webkit-background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+.clip-text:before,
+.clip-text:after {
+  position: absolute;
+  content: "";
+}
+
 .clip-text:before {
   z-index: -2;
   top: 0;
@@ -170,50 +229,75 @@ export default {
 .clip-text_thirteen {
   background-image: url(https://i.ytimg.com/vi/MU3qrgR2Kkc/maxresdefault.jpg);
 }
-
-.createCard {
+.addCard {
   font-family: "Roboto", sans-serif;
   width: 150px;
 
-  background-color: rgba(255, 255, 255, 1);
+  background-color: rgb(127 181 127);
   border-radius: 10px;
   display: block;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 10px;
 }
 
-.createCard:hover {
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-}
-
-.createCard {
-  margin-top: 10px;
-}
-
-.viewSession {
+.startSession {
   font-family: "Roboto", sans-serif;
   width: 150px;
 
-  background-color: rgba(255, 255, 255, 1);
+  background-color: rgba(248, 198, 126, 1);
   border-radius: 10px;
   display: block;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 10px;
+}
+.randomSession {
+  font-family: "Roboto", sans-serif;
+  width: 150px;
+
+  background-color: rgb(127 181 127);
+  border-radius: 10px;
+  margin-right: 10px;
+}
+.lightningSession {
+  font-family: "Roboto", sans-serif;
+  width: 150px;
+
+  background-color: rgb(127 181 127);
+  border-radius: 10px;
+  margin-right: 10px;
 }
 
-.viewSession:hover {
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+.createDeck {
+  font-family: "Roboto", sans-serif;
+  width: 150px;
+
+  background-color: skyblue;
+  border-radius: 10px;
+}
+.buttonWrapper {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  padding-top: 6px;
+  margin-bottom: 80px;
 }
 
 .cards {
   background-color: transparent;
   width: 300px;
   height: 200px;
-  border: 1px solid #f1f1f1;
-  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+
+  perspective: 1000px;
+  margin-right: 50px;
+  margin-left: 80px;
+  margin-top: -40px;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 150px;
 }
 
-/* This container is needed to position the front and back side */
 .flip-box-inner {
   position: relative;
   width: 100%;
@@ -223,30 +307,50 @@ export default {
   transform-style: preserve-3d;
 }
 
-/* Do an horizontal flip when you move the mouse over the flip box container */
-.cards:hover .flip-box-inner {
+.cards:active .flip-box-inner {
   transform: rotateY(180deg);
 }
 
-/* Position the front and back side */
 .flip-box-front,
 .flip-box-back {
   position: absolute;
   width: 100%;
   height: 100%;
-
+  font-family: Comic sans ms;
+  font-size: 30px;
   backface-visibility: hidden;
+  border-radius: 25px;
 }
 
-/* Style the front side */
 .flip-box-front {
-  background-color: #bbb;
+  background-color: rgb(106, 90, 205);
+
+  padding: 50px 10px 10px 20px;
 }
 
-/* Style the back side */
 .flip-box-back {
-  background-color: dodgerblue;
+  background-color: rgba(248, 198, 126, 1);
 
   transform: rotateY(180deg);
+}
+button:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.updateCard {
+  font-family: "Roboto", sans-serif;
+  width: 100px;
+
+  background-color: rgb(127 181 127);
+  border-radius: 10px;
+  margin-left: 45px;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+.deleteCard {
+  font-family: "Roboto", sans-serif;
+  width: 100px;
+  background-color: rgb(127 181 127);
+  border-radius: 10px;
 }
 </style>

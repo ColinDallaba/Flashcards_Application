@@ -18,11 +18,12 @@
         v-bind:key="deck.userID"
       >
         <div class="deckCard">
-          {{ deck.name }} <br />
-          <br />
-          {{ deck.description }}
-          <br />
-          <br />
+          <div class="deckName">
+            {{ deck.name }}
+          </div>
+          <div class="deckDesc">
+            {{ deck.description }}
+          </div>
           <div class="rank">Rank: {{ deckRank(deck.rank) }}</div>
         </div>
         <div class="buttonWrapper">
@@ -36,14 +37,14 @@
               })
             "
           >
-            EDIT
+            Edit
           </button>
           <button
             type="button"
             class="delete-icon"
             @click="removeDecks(deck.deckID)"
           >
-            DELETE
+            Delete
           </button>
           <button
             id="view-deck"
@@ -126,15 +127,24 @@ export default {
 </script>
 
 <style scoped>
+.deckName {
+  font-size: 40px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  font-family: Comic sans ms;
+}
+.deckDesc {
+  font-size: 26px;
+}
 .rank {
-  margin-top: -30px;
-  font-size: 15px;
+  font-size: 17px;
+  margin-top: 5px;
 }
 .updateDeck {
   font-family: "Roboto", sans-serif;
   width: 150px;
 
-  background-color: rgba(255, 255, 255, 1);
+  background-color: rgb(127 181 127);
   border-radius: 10px;
 }
 
@@ -142,7 +152,7 @@ export default {
   font-family: "Roboto", sans-serif;
   width: 150px;
 
-  background-color: rgba(255, 255, 255, 1);
+  background-color: rgba(248, 198, 126, 1);
   border-radius: 10px;
 }
 
@@ -150,7 +160,7 @@ export default {
   font-family: "Roboto", sans-serif;
   width: 150px;
 
-  background-color: rgba(255, 255, 255, 1);
+  background-color: rgb(127 181 127);
   border-radius: 10px;
 }
 
@@ -173,6 +183,7 @@ export default {
   display: block;
   margin-left: auto;
   margin-right: auto;
+
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 10px 0 -10px white,
     0 10px 1px -4px rgba(0, 0, 0, 0.15), 12px 20px 0 -10px white,
     13px 29px 1px -12px rgba(0, 0, 0, 0.15), 15px 25px 0 -10px white,
@@ -198,7 +209,6 @@ export default {
   left: 0;
 }
 
-/* Clip text element */
 .clip-text {
   font-size: 5em;
   font-weight: bold;
@@ -257,7 +267,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0;
+
   position: absolute;
   top: 50%;
   left: 50%;
@@ -267,8 +277,10 @@ export default {
   width: 400px;
   height: 50px;
 
-  background-color: rgb(127 181 127);
+  background-color: skyblue;
   border-radius: 10px;
+  margin-top: 20px;
+  margin-bottom: 90px;
 }
 .add {
   white-space: nowrap;
@@ -281,10 +293,10 @@ export default {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 .container {
-  margin-top: 0px;
+  margin-top: 70px;
 }
 
-.add:hover {
+button:hover {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 </style>

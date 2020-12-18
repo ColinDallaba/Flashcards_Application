@@ -1,17 +1,18 @@
 <template>
-
-  
-
   <div class="page">
     <div class="wrapper">
-    
       <div class="clip-text clip-text_thirteen clip-text--cover">
         Create Deck
       </div>
-    
     </div>
     <form @submit.prevent="newDeck()">
-      <input type="text" id="answer" placeholder="Name" v-model="deck.name" required />
+      <input
+        type="text"
+        id="answer"
+        placeholder="Name"
+        v-model="deck.name"
+        required
+      />
 
       <input
         type="text"
@@ -22,11 +23,11 @@
       />
       <button type="submit">Create Deck</button>
 
-      <button type="button" class="createCard" @click="$router.push('/')">Cancel</button>
-
+      <button type="button" class="createCard" @click="$router.push('/')">
+        Cancel
+      </button>
     </form>
   </div>
-  
 </template>
 <script>
 import authService from "../services/AuthService";
@@ -70,9 +71,9 @@ label {
 }
 input {
   font-family: "Roboto", sans-serif;
-  width: 250px;
-  margin: 10px auto;
-  background: linear-gradient(to right, #f8c77e 0%, #f8c77e 50%, #deb871 99%);
+  width: 200px;
+  margin: 20px auto;
+  background: rgb(248 200 126);
   border-radius: 10px;
 }
 input:hover {
@@ -91,8 +92,8 @@ button {
   font-family: "Roboto", sans-serif;
   width: 250px;
   margin-right: 10px;
-  background-color: rgba(125 189 127);
-  border-radius: 50px;
+  background-color: rgb(127 181 127);
+  border-radius: 10px;
 }
 button:hover {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
@@ -104,8 +105,8 @@ button:hover {
 
   background-image: linear-gradient(
     0deg,
-    rgb(252, 220, 226) 9%,
-    rgba(255, 255, 255, 1) 64%
+    rgb(239 128 102 / 79%) 40%,
+    rgba(3 83 99 / 2%) 64%
   );
   min-height: 100%;
   min-width: 1024px;

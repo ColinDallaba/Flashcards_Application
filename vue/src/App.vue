@@ -7,9 +7,11 @@
       />
       <ul>
         <li class="home">
-          <router-link v-bind:to="{ name: 'home' }"
-                        v-if="$store.state.token != ''">
-                        Home</router-link
+          <router-link
+            v-bind:to="{ name: 'home' }"
+            v-if="$store.state.token != ''"
+          >
+            Home</router-link
           >&nbsp;|&nbsp;
         </li>
         <li class="logout">
@@ -21,16 +23,13 @@
         </li>
       </ul>
     </div>
-    <transition
-        name="fade"
-        mode="out-in"
-      >
-        <router-view/>
-      </transition>
+    <transition name="fade" mode="out-in">
+      <router-view />
+    </transition>
   </div>
 </template>
 
-<style >
+<style scoped>
 .fade-enter-active,
 .fade-leave-active {
   transition-duration: 0.3s;
@@ -40,7 +39,7 @@
 
 .fade-enter,
 .fade-leave-active {
-  opacity: 0
+  opacity: 0;
 }
 ul {
   margin: 0;
