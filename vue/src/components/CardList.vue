@@ -317,7 +317,7 @@ export default {
   width: 100%;
   height: 100%;
   font-family: Comic sans ms;
-  font-size: 30px;
+  font-size: 20px;
   backface-visibility: hidden;
   border-radius: 25px;
 }
